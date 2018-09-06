@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/test.css">
+    <link rel="stylesheet" href="/css/class.css">
+    <script src="/js/jquery-3.1.1.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+<body>
+<div id="vue_c">
+    <div class="c_container" id="c_container"  v-bind:style="{height: min_height}">
+        <div class="c_cs" >
+            <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" v-bind:style="{height: min_height}" style="margin-right: 10px;background:white;">
+                <div v-for="c in cs">
+                    <li class="layui-nav-item layui-nav-itemed" style="color: black">
+                        <a href="javascript:" v-on:click='gbs(c.gId);sw=false'><b style="color: black;font-weight: lighter">{{c.gName}}</b></a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div class="c_bs">
+            <div v-show="sw">
+                <img src="/img/head2.gif" width="500px"></img>
+            </div>
+            <div class="items" v-for="obj in bs">
+                <div class="z_item">
+                    <div class="item_data">
+                        <div class="b_title">
+                            <a v-bind:href="'/u/'+obj.uid+'/p/'+obj.bid">{{obj.btitle}}</a>
+                        </div>
+                        <div class="b_info" style="overflow:hidden; text-overflow:ellipsis;">
+                            <span v-text="obj.bdata"></span>
+                        </div>
+                        <div class="b_date">
+                            发布时间：{{obj.bdate}}
+                        </div>
+                    </div>
+                    <div class="item_nav">
+                        <div class="common"><a v-bind:href="'/u/'+obj.uid+'/p/'+obj.bid">评论(1)</a></div>
+                        <div class="browser"><a v-bind:href="'/u/'+obj.uid+'/p/'+obj.bid">浏览(1)</a></div>
+                        <div class="fenge"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="z_dock" id="z_dock">
+    <a href="test.html"> <b>主页</b></a>
+    <b>分类</b>
+    <span v-if="show">
+        <b  style="color: white" class="layui-icon layui-icon-down" v-on:click="show = !show"></b>
+    </span>
+    <span v-else="show">
+        <b style="color: white" class="layui-icon layui-icon-up" v-on:click="show = !show"></b>
+    </span>
+    <b>归档</b>
+    <b>留言</b>
+    <transition name="fade">
+        <div v-show="show">
+            <div id="data" class="layui-colla-content layui-show">@author : zhoulike</div>
+        </div>
+    </transition>
+</div>
+<script>
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+    });
+    var height=$(document).height();
+    var cs=new Vue({
+        el:'#vue_c',
+        data:{
+            cs:{},
+            bs:{},
+            min_height:height-21+"px",
+            sw:true
+        },
+        methods:{
+            gcs:function () {
+                var _this=this;
+                $.ajax({
+                    url:"/groupmodel",
+                    type:"get",
+                    dataType:"text",
+                    data:{
+                        "username":1008612
+                    },
+                    success:function (data) {
+                        var group=JSON.parse(data);
+                        _this.cs=group;
+                    }
+                })
+            },
+            gbs:function (gid) {
+                var _this=this;
+                $.ajax({
+                    url:"/api/essay/category",
+                    type:"get",
+                    dataType:"text",
+                    data:{
+                        "value":gid
+                    },
+                    success:function (data) {
+                        var cat=JSON.parse(data);
+                        _this.bs=cat;
+                    }
+                })
+            }
+        }
+
+    });//vue--cs
+    cs.gcs();
+    var dock = new Vue({
+        el:"#z_dock",
+        data:{
+            show:true
+        },
+
+    });
+</script>
+</body>
+</html>

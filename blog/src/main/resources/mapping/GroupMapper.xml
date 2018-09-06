@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.Group" >
+    <id column="gId" property="gid" jdbcType="VARCHAR" />
+    <result column="uId" property="uid" jdbcType="VARCHAR" />
+    <result column="gName" property="gname" jdbcType="VARCHAR" />
+    <result column="gLabel" property="glabel" jdbcType="VARCHAR" />
+    <result column="gGrade" property="ggrade" jdbcType="INTEGER" />
+    <result column="gParent" property="gparent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gId, uId, gName, gLabel, gGrade, gParent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_group
+    where gId = #{gid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_group
+    where gId = #{gid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlk.blog.entity.Group" >
+    <selectKey keyProperty="gid"  resultType="java.lang.String" keyColumn="gId">
+      select LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_group (uId, gName,
+      gLabel, gGrade, gParent
+      )
+    values ( #{uid,jdbcType=VARCHAR}, #{gname,jdbcType=VARCHAR},
+      #{glabel,jdbcType=VARCHAR}, #{ggrade,jdbcType=INTEGER}, #{gparent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.Group">
+
+    insert into tb_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="gname != null" >
+        gName,
+      </if>
+      <if test="glabel != null" >
+        gLabel,
+      </if>
+      <if test="ggrade != null" >
+        gGrade,
+      </if>
+      <if test="gparent != null" >
+        gParent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="glabel != null" >
+        #{glabel,jdbcType=VARCHAR},
+      </if>
+      <if test="ggrade != null" >
+        #{ggrade,jdbcType=INTEGER},
+      </if>
+      <if test="gparent != null" >
+        #{gparent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlk.blog.entity.Group" >
+    update tb_group
+    <set >
+      <if test="uid != null" >
+        uId = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="gname != null" >
+        gName = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="glabel != null" >
+        gLabel = #{glabel,jdbcType=VARCHAR},
+      </if>
+      <if test="ggrade != null" >
+        gGrade = #{ggrade,jdbcType=INTEGER},
+      </if>
+      <if test="gparent != null" >
+        gParent = #{gparent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gId = #{gid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlk.blog.entity.Group" >
+    update tb_group
+    set uId = #{uid,jdbcType=VARCHAR},
+      gName = #{gname,jdbcType=VARCHAR},
+      gLabel = #{glabel,jdbcType=VARCHAR},
+      gGrade = #{ggrade,jdbcType=INTEGER},
+      gParent = #{gparent,jdbcType=VARCHAR}
+    where gId = #{gid,jdbcType=VARCHAR}
+  </update>
+</mapper>

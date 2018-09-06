@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.BGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.BGroupKey" >
+    <id column="gId" property="gid" jdbcType="VARCHAR" />
+    <id column="bId" property="bid" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.zlk.blog.entity.BGroupKey" >
+    delete from tb_bgroup
+    where gId = #{gid,jdbcType=VARCHAR}
+      and bId = #{bid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlk.blog.entity.BGroupKey" >
+    insert into tb_bgroup (gId, bId)
+    values (#{gid,jdbcType=VARCHAR}, #{bid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.BGroupKey" >
+    insert into tb_bgroup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        gId,
+      </if>
+      <if test="bid != null" >
+        bId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

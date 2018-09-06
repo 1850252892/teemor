@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.BOtherMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.BOther" >
+    <id column="bId" property="bid" jdbcType="VARCHAR" />
+    <result column="collect" property="collect" jdbcType="INTEGER" />
+    <result column="great" property="great" jdbcType="INTEGER" />
+    <result column="diss" property="diss" jdbcType="INTEGER" />
+    <result column="browse" property="browse" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bId, collect, great, diss, browse
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_bother
+    where bId = #{bid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_bother
+    where bId = #{bid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlk.blog.entity.BOther" >
+    insert into tb_bother (bId, collect, great, 
+      diss, browse)
+    values (#{bid,jdbcType=VARCHAR}, #{collect,jdbcType=INTEGER}, #{great,jdbcType=INTEGER}, 
+      #{diss,jdbcType=INTEGER}, #{browse,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.BOther" >
+    insert into tb_bother
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bid != null" >
+        bId,
+      </if>
+      <if test="collect != null" >
+        collect,
+      </if>
+      <if test="great != null" >
+        great,
+      </if>
+      <if test="diss != null" >
+        diss,
+      </if>
+      <if test="browse != null" >
+        browse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bid != null" >
+        #{bid,jdbcType=VARCHAR},
+      </if>
+      <if test="collect != null" >
+        #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="great != null" >
+        #{great,jdbcType=INTEGER},
+      </if>
+      <if test="diss != null" >
+        #{diss,jdbcType=INTEGER},
+      </if>
+      <if test="browse != null" >
+        #{browse,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlk.blog.entity.BOther" >
+    update tb_bother
+    <set >
+      <if test="collect != null" >
+        collect = #{collect,jdbcType=INTEGER},
+      </if>
+      <if test="great != null" >
+        great = #{great,jdbcType=INTEGER},
+      </if>
+      <if test="diss != null" >
+        diss = #{diss,jdbcType=INTEGER},
+      </if>
+      <if test="browse != null" >
+        browse = #{browse,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bId = #{bid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlk.blog.entity.BOther" >
+    update tb_bother
+    set collect = #{collect,jdbcType=INTEGER},
+      great = #{great,jdbcType=INTEGER},
+      diss = #{diss,jdbcType=INTEGER},
+      browse = #{browse,jdbcType=INTEGER}
+    where bId = #{bid,jdbcType=VARCHAR}
+  </update>
+</mapper>

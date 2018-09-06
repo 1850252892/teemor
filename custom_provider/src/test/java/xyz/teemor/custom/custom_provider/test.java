@@ -14,12 +14,12 @@ public class test {
     public void tes(){
         String str = "123456";
         String salt = "";
-        String md5 = new Md5Hash(str,"",1).toString();//还可以转换为 toBase64()/toHex()&nbsp;
+        String md5 =new Md5Hash("123456","1008611",1).toString();
 //        md5=new Md5Hash(md5).toString() ;
-        char[] mm=md5.toCharArray();
-
-        String md=new Md5Hash(mm).toString();
-        System.out.println(md);
+//        char[] mm=md5.toCharArray();
+//
+//        String md=new Md5Hash(mm).toString();
+        System.out.println(md5);
     }
     @Test
     public void redisTest(){

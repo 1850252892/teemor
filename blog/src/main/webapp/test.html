@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/test.css">
+    <script src="/js/jquery-3.1.1.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+<body>
+<div class="z_top">
+</div>
+<div class="z_container" id="z_container">
+    <div class="items" v-for="obj in objs">
+        <div class="z_item">
+            <div class="item_data">
+                <div class="b_title">
+                    <a v-bind:href="'/u/'+obj.uid+'/p/'+obj.bid">{{obj.btitle}}</a>
+                </div>
+                <div class="b_info" style="overflow:hidden; text-overflow:ellipsis;">
+                    <span v-text="obj.bdata"></span>
+                </div>
+                <div class="b_date">
+                    发布时间：{{obj.bdate}}
+                </div>
+                </div>
+            <div class="item_nav">
+                <div class="common"><a v-bind:href="'/u/'+obj.uid+'/p/'+obj.bid">评论(1)</a></div>
+                <div class="browser"><a v-bind:href="'/u/'+obj.uid+'/p/'+obj.bid">浏览(1)</a></div>
+                <div class="fenge"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="z_dock" id="z_dock">
+    <a href="test.html"> <b>主页</b></a>
+    <a href="class.html"><b>分类</b></a>
+    <span v-if="show">
+        <b  style="color: white" class="layui-icon layui-icon-down" v-on:click="show = !show"></b>
+    </span>
+    <span v-else="show">
+        <b style="color: white" class="layui-icon layui-icon-up" v-on:click="show = !show"></b>
+    </span>
+    <b>归档</b>
+    <b>留言</b>
+    <transition name="fade">
+    <div v-show="show">
+        <div id="data" class="layui-colla-content layui-show">@author : zhoulike</div>
+    </div>
+    </transition>
+</div>
+
+
+</body>
+<script>
+    //数据
+    let objs = [{
+        title: "Hello World",
+        info: '123',
+        date: '2018-8-16'
+    }, {
+        title: "Hello World",
+        info: '123',
+        date: '2018-8-16'
+    }, {
+        title: "Hello World",
+        info: '123',
+        date: '2018-8-16'
+    }];
+    //声明式渲染
+    var bl = new Vue({
+        el: '#z_container',
+        data: {objs: objs,show:true},
+        methods:{
+            blogs:function () {
+                var _this=this;
+                $.ajax({
+                    url:"/essaylist",
+                    type:"get",
+                    dateType:"text",
+                    contentType:"application/text",
+                    data:{
+                        'username':"1008612"
+                    },
+                    success:function (data) {
+                        var list=JSON.parse(data);
+                        _this.objs=list;
+                    },
+                    error:function () {
+
+                    }
+                });
+            }
+        }
+    });//vue--bl
+    bl.blogs();
+
+    var dock = new Vue({
+        el:"#z_dock",
+        data:{
+            show:true
+        },
+
+    });
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+</script>
+</html>

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import xyz.teemor.custom.custom_provider.entity.User;
 import xyz.teemor.custom.custom_provider.entity.UserPermission;
 import xyz.teemor.custom.custom_provider.entity.UserRole;
-import xyz.teemor.custom.custom_provider.service.serviceImpl.UserService;
+import xyz.teemor.custom.custom_provider.service.IUserService;
 import xyz.teemor.custom.custom_provider.util.JWTUtil;
 import xyz.teemor.custom.custom_provider.util.RedisUtil;
 
@@ -23,9 +23,18 @@ import java.util.Set;
 
 public class JwtRealm extends AuthorizingRealm {
     @Autowired
-    UserService userService;
+    IUserService userService;
     @Autowired
     RedisUtil redisUtil;
+
+    /**
+     * 大坑！，必须重写此方法，不然Shiro会报错
+     */
+    @Override
+    public boolean supports(AuthenticationToken token) {
+        return token instanceof JWTToken;
+    }
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JWTUtil.getUsername(principals.toString());
@@ -63,8 +72,8 @@ public class JwtRealm extends AuthorizingRealm {
             throw new AuthenticationException("User didn't existed!");
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user.getAccount(), //用户名
-                user.getPwd(), //密码
+                token, //用户名
+                token, //密码
                 getName()  //realm name
         );
         return authenticationInfo;

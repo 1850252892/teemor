@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+
+
+
+		<link href="/css/creatEssay.css" rel="stylesheet" type="text/css" />
+		<link href="/css/editType.css" rel="stylesheet" type="text/css" />
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+		<link href="/css/bootstrap-table.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/js/bootstrap-table.js"></script>
+		<script type="text/javascript" src="/js/bootstrap-table-zh-CN.js"></script>
+		<script type="text/javascript" src="/js/editType.js"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="/js/mycategorys.js"></script>
+	</head>
+
+	<body class="body">
+		<div class="content">
+
+			<div class="head">
+				Cloud Note
+			</div>
+
+
+
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel"></h4>
+						</div>
+						<div class="modal-body">
+							<div id="gId" style="display: none">
+
+							</div>
+							<label>分组名</label><br />
+							<input type="text" name="gName" id="gName" style="width: 100%" placeholder="输入新的分组名"/><br />
+							<label>描述</label><br />
+							<textarea type="" name="gLabel" id="gLabel" style="width: 100%;height: 150px" placeholder="输入分组描述"/>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" onclick="editGroup()">提交更改</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+
+			<div class="left">
+				<div class="operation">
+					<a href="/admin/console"><label>操作</label></a>
+					<ul>
+						<li>
+							<a href="/admin/createEssay">新建文章</a>
+						</li>
+						<li>
+							<a href="#">草稿箱</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="classify">
+					<label>分类</label>
+					<ul id="group_list">
+						<li>
+							<a href="/admin/editType">编辑分类</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="editBox">
+				<label class="lb">编辑分类</label>
+				<div class="categories-box">
+					<div id="reportTableDiv" >
+						<table id="reportTable"></table>
+					</div>
+				</div>
+				<label class="lb">创建新分组</label>
+				<label>分组名</label>
+				<input style="text" name="groupTitle" id="groupTitle" placeholder="分组名" />
+				<label >分组描述</label>
+				<textarea class="info" name="groupinfo" id="groupinfo" placeholder="输入该分类描述（可选）"></textarea>
+				<button class="btn btn-default" style="margin-bottom: 10px;" onclick="creategroup()">确认提交</button>
+			</div>
+
+			<div class="bt"></div>
+		</div>
+	</body>
+    <script type="text/javascript">
+        //手动制造30条数据
+
+
+
+    </script>
+</html>

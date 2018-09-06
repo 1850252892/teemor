@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/test.css">
+    <script src="/js/jquery-3.1.1.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+<body>
+<div class="z_top">
+</div>
+<div class="z_container" id="z_container">
+    <div class="items" v-for="obj in objs">
+        <div class="z_item">
+            <div class="item_data">
+                <div class="b_title">
+                    {{obj.title}}
+                </div>
+                <div class="b_info">
+                    {{obj.info}}
+                </div>
+                <div class="b_date">
+                    发布时间：@{{obj.date}}
+                </div>
+            </div>
+            <div class="item_nav"></div>
+        </div>
+    </div>
+</div>
+<div class="z_dock">
+    <b>主页</b>
+    <b>分类</b>
+    <a href="javascript:" id="ud" class="layui-icon layui-icon-down"></a>
+    <b>归档</b>
+    <b>留言</b>
+    <div id="data" class="layui-colla-content layui-show">timoor</div>
+</div>
+
+
+</body>
+<script>
+    //数据
+    let objs = [{
+        title: "Hello World",
+        info: '123',
+        date: '2018-8-16'
+    }, {
+        title: "Hello World",
+        info: '123',
+        date: '2018-8-16'
+    }, {
+        title: "Hello World",
+        info: '123',
+        date: '2018-8-16'
+    }];
+    //声明式渲染
+    var bl = new Vue({
+        el: '#z_container',
+        data: {objs: objs}
+    });
+
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+    $("#ud").click(function () {
+        var ud = $("#ud");
+        if ($("#data").hasClass("layui-show")) {
+            $("#data").removeClass("layui-show");
+            ud.removeClass("layui-icon-down");
+            ud.addClass("layui-icon-up");
+        } else {
+            $("#data").addClass("layui-show");
+            ud.removeClass("layui-icon-up");
+            ud.addClass("layui-icon-down");
+        }
+        console.log($("#data").className);
+    })
+</script>
+</html>

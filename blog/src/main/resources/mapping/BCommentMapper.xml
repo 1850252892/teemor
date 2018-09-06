@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.BCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.BComment" >
+    <id column="bcId" property="bcid" jdbcType="VARCHAR" />
+    <result column="bId" property="bid" jdbcType="VARCHAR" />
+    <result column="uId" property="uid" jdbcType="VARCHAR" />
+    <result column="bcDate" property="bcdate" jdbcType="TIME" />
+    <result column="great" property="great" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlk.blog.entity.BComment" extends="BaseResultMap" >
+    <result column="bcData" property="bcdata" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bcId, bId, uId, bcDate, great
+  </sql>
+  <sql id="Blob_Column_List" >
+    bcData
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_bcomment
+    where bcId = #{bcid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_bcomment
+    where bcId = #{bcid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlk.blog.entity.BComment" >
+    insert into tb_bcomment (bcId, bId, uId, 
+      bcDate, great, bcData
+      )
+    values (#{bcid,jdbcType=VARCHAR}, #{bid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{bcdate,jdbcType=TIME}, #{great,jdbcType=INTEGER}, #{bcdata,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.BComment" >
+    insert into tb_bcomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bcid != null" >
+        bcId,
+      </if>
+      <if test="bid != null" >
+        bId,
+      </if>
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="bcdate != null" >
+        bcDate,
+      </if>
+      <if test="great != null" >
+        great,
+      </if>
+      <if test="bcdata != null" >
+        bcData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bcid != null" >
+        #{bcid,jdbcType=VARCHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="bcdate != null" >
+        #{bcdate,jdbcType=TIME},
+      </if>
+      <if test="great != null" >
+        #{great,jdbcType=INTEGER},
+      </if>
+      <if test="bcdata != null" >
+        #{bcdata,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlk.blog.entity.BComment" >
+    update tb_bcomment
+    <set >
+      <if test="bid != null" >
+        bId = #{bid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uId = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="bcdate != null" >
+        bcDate = #{bcdate,jdbcType=TIME},
+      </if>
+      <if test="great != null" >
+        great = #{great,jdbcType=INTEGER},
+      </if>
+      <if test="bcdata != null" >
+        bcData = #{bcdata,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where bcId = #{bcid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlk.blog.entity.BComment" >
+    update tb_bcomment
+    set bId = #{bid,jdbcType=VARCHAR},
+      uId = #{uid,jdbcType=VARCHAR},
+      bcDate = #{bcdate,jdbcType=TIME},
+      great = #{great,jdbcType=INTEGER},
+      bcData = #{bcdata,jdbcType=LONGVARCHAR}
+    where bcId = #{bcid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlk.blog.entity.BComment" >
+    update tb_bcomment
+    set bId = #{bid,jdbcType=VARCHAR},
+      uId = #{uid,jdbcType=VARCHAR},
+      bcDate = #{bcdate,jdbcType=TIME},
+      great = #{great,jdbcType=INTEGER}
+    where bcId = #{bcid,jdbcType=VARCHAR}
+  </update>
+</mapper>

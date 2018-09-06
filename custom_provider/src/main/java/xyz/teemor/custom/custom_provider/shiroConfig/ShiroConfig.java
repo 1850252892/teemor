@@ -28,6 +28,7 @@ import xyz.teemor.custom.custom_provider.filter.MyPermissionFilter;
 import xyz.teemor.custom.custom_provider.filter.StatelessAuthcFilter;
 import xyz.teemor.custom.custom_provider.service.serviceImpl.UserService;
 import xyz.teemor.custom.custom_provider.util.PermissionType;
+import xyz.teemor.custom.custom_provider.util.RedisUtil;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -62,6 +63,14 @@ public class ShiroConfig {
 
     @Autowired
     UserService userService;
+
+    @Bean
+    public RedisUtil redisUtil(){
+        RedisUtil redisUtil= new RedisUtil();
+        redisUtil.init();
+        return redisUtil;
+    }
+
     /**
      * 凭证匹配器
      * （由于我们的密码校验交给Shiro的SimpleAuthenticationInfo进行处理了
@@ -78,9 +87,9 @@ public class ShiroConfig {
     }
 
     @Bean
-    public UserRealm myShiroRealm() {
-        UserRealm realm = new UserRealm();
-        realm.setCredentialsMatcher(hashedCredentialsMatcher());
+    public JwtRealm myShiroRealm() {
+        JwtRealm realm = new JwtRealm();
+//        realm.setCredentialsMatcher(hashedCredentialsMatcher());
 //        // cas登录服务器地址前缀
 //        realm.setCasServerUrlPrefix(ShiroConfig.casServerUrlPrefix);
 //        // 客户端回调地址，登录成功后的跳转地址(自己的服务地址)
@@ -236,6 +245,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/public/**", "anon");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
+        filterChainDefinitionMap.put("/jwtLogin", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         // 此处将logout页面设置为anon，而不是logout，因为logout被单点处理，而不需要再被shiro的logoutFilter进行拦截
 

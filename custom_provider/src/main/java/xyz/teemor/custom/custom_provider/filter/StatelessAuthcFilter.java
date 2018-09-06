@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import xyz.teemor.custom.custom_provider.model.ResponseModel;
 import xyz.teemor.custom.custom_provider.shiroConfig.JWTToken;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class StatelessAuthcFilter extends AccessControlFilter {
+public class StatelessAuthcFilter extends BasicHttpAuthenticationFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {

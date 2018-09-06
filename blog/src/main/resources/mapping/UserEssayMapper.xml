@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.UserEssayMapper" >
+    <resultMap id="BaseResultMap" type="com.zlk.blog.entity.UserEssay" >
+        <id column="uId" property="uid" jdbcType="VARCHAR" />
+        <id column="bId" property="bid" jdbcType="VARCHAR" />
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="com.zlk.blog.entity.UserEssay" >
+        delete from tb_useressay
+        where uId = #{uid,jdbcType=VARCHAR}
+        and bId = #{bid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.zlk.blog.entity.UserEssay" >
+        insert into tb_useressay (uId, bId)
+        values (#{uid,jdbcType=VARCHAR}, #{bid,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.zlk.blog.entity.UserEssay" >
+        insert into tb_useressay
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="uid != null" >
+                uId,
+            </if>
+            <if test="bid != null" >
+                bId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="uid != null" >
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="bid != null" >
+                #{bid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

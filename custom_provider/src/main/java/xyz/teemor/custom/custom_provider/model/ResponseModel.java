@@ -1,6 +1,14 @@
 package xyz.teemor.custom.custom_provider.model;
 
 public class ResponseModel {
+    public static int NOTEXISTS=1001;
+    public static int SECRETERROR=1002;
+    public static int USERLOCK=1003;
+    public static int TOKENERROR=1004;
+    public static int LOGINSUCEESS=2000;
+    public static int ACCOUNTEXISTS=3001;
+    public static int PASSWORDLONG=3002;
+    public static int REGISTERSUCESS=2002;
     //状态码
     private int code;
     //返回消息

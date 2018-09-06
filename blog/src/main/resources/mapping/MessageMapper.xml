@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.Message" >
+    <result column="uId" property="uid" jdbcType="VARCHAR" />
+    <result column="mDate" property="mdate" jdbcType="TIME" />
+    <result column="mType" property="mtype" jdbcType="VARCHAR" />
+    <result column="mStatus" property="mstatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlk.blog.entity.Message" extends="BaseResultMap" >
+    <result column="mData" property="mdata" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    mData
+  </sql>
+  <insert id="insert" parameterType="com.zlk.blog.entity.Message" >
+    insert into tb_message (uId, mDate, mType, 
+      mStatus, mData)
+    values (#{uid,jdbcType=VARCHAR}, #{mdate,jdbcType=TIME}, #{mtype,jdbcType=VARCHAR}, 
+      #{mstatus,jdbcType=INTEGER}, #{mdata,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.Message" >
+    insert into tb_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="mdate != null" >
+        mDate,
+      </if>
+      <if test="mtype != null" >
+        mType,
+      </if>
+      <if test="mstatus != null" >
+        mStatus,
+      </if>
+      <if test="mdata != null" >
+        mData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="mdate != null" >
+        #{mdate,jdbcType=TIME},
+      </if>
+      <if test="mtype != null" >
+        #{mtype,jdbcType=VARCHAR},
+      </if>
+      <if test="mstatus != null" >
+        #{mstatus,jdbcType=INTEGER},
+      </if>
+      <if test="mdata != null" >
+        #{mdata,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
