@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8" />
+    <title>Spring Security Example </title>
+
+
+    <link href="/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/layui/css/layui.css" />
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.md5.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/layui/layui.js"></script>
+</head>
+
+<body>
+<div class="main">
+    <div class="loginBox" id="loginBox">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="height: auto;overflow: auto;background: white;border-radius: 5px">
+            <ul class="layui-tab-title">
+                <li class="layui-this">SIGN ON</li>
+                <li>REGISTER</li>
+            </ul>
+            <div class="layui-tab-content" style="height: auto;overflow: auto;background: white;">
+                <div class="layui-tab-item layui-show">
+                    <!-- 用户名框 -->
+                    <div class="inputLine">
+                        <span class="icon-user icon-2x"></span> <input type="text" class="layui-input" name="username" v-model="username"  tautocomplete="off" placeholder="账号"  />
+                    </div>
+                    <!-- 密码框 -->
+                    <div class="inputLine">
+                        <span class="icon-lock icon-2x"></span> <input type="password" class="layui-input"  v-model="password"   tautocomplete="off" placeholder="密码" />
+                    </div>
+                    <!-- 验证码 -->
+                    <div class="validate">
+                        <input type="text" name="validateCode" class="validateCode " placeholder="输入验证码" />
+                        <img onclick="reLoadImg()" src="#" class="validateImg" />
+                    </div>
+                    <!-- 登录按钮 -->
+                    <div>
+                        <button type="button" v-on:click="login" class="loginButton layui-btn layui-btn-normal">Login</button>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <!-- 用户名框 -->
+                    <div class="inputLine">
+                        <span class="icon-user icon-2x"></span> <input type="text" class="layui-input" name="username" v-model="username"  tautocomplete="off" placeholder="输入账号"  />
+                    </div>
+                    <!-- 密码框 -->
+                    <div class="inputLine">
+                        <span class="icon-lock icon-2x"></span> <input type="password" class="layui-input"  v-model="password"   tautocomplete="off" placeholder="设置密码" />
+                    </div>
+                    <!-- 密码框 -->
+                    <div class="inputLine">
+                        <span class="icon-lock icon-2x"></span> <input type="email" class="layui-input"  v-model="password"   tautocomplete="off" placeholder="绑定邮箱" />
+                    </div>
+                    <!-- 验证码 -->
+                    <div class="inputLine">
+                        <input type="email" class="layui-input"  v-model="password"   tautocomplete="off" placeholder="输入验证码" />
+                    </div>
+                    <!-- 登录按钮 -->
+                    <div>
+                        <button type="button" v-on:click="login" class="loginButton layui-btn layui-btn-normal">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    var bl = new Vue({
+        el: '#loginBox',
+        data: {"username":"","password":""},
+        methods:{
+            login:function () {
+                var _this=this;
+                this.password=$.md5(''+this.password);
+
+            }
+        }
+    });//vue--bl
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+    function ajaxLogin(username,password) {
+        $.ajax({
+            url:'/uc/ajaxLogin',
+            type:'post',
+            dataType:'text',
+            data:JSON.stringify({
+                'username':username,
+                'password':password
+            }),
+            success:function (result) {
+
+            },
+            error:function () {
+
+            }
+        })
+    }
+</script>
+</html>

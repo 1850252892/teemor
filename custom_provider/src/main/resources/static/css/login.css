@@ -1,0 +1,111 @@
+body{
+	background-image: url("../img/login.jpg");
+}
+a{
+	
+	text-decoration:none;
+}
+a:link {
+	text-decoration: none;
+	color:black;
+}
+a:visited {
+	color:black;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+.main{
+	width: 315px;
+	height: 300px;
+
+	margin: 0 auto;
+	margin-top:200px;
+	/*border: 1px solid rgba(39,40,34,0.5);*/
+
+}
+.topTips{
+	width: 300px;
+	height: 50px;
+	font-family: "微软雅黑";
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: 500;
+	margin:10px 0 0 10px;
+}
+#l{
+	width: 140px;
+	margin: 0;
+	text-align: center;
+}
+#r{
+	background: rgba(245,222,172,0.3);
+	width: 140px;
+	margin: 0;
+	text-align: center;
+}
+.inputLine{
+	width: 295px;
+	height: 37px;
+	line-height: 37px;
+	/*margin: 10px;*/
+	/*float: left;*/
+	/*border: 1px solid rgba(39,40,34,0.5);*/
+}
+.inputLine label{
+	float: left;
+	height: 35px;
+	width: 35px;
+	line-height: 35px;
+	background: white;
+	padding-left:10px ;
+	background: rgba(0,0,0,0.3);
+	color: papayawhip;
+	border: 0;
+}
+.inputLine input{
+	float: right;
+	height: 35px;
+	width: 250px;
+	padding-left: 10px;
+	border: 0;
+	/*background: rgba(117, 69, 57, 0.3);*/
+	border: 1px solid rgb(201,201,201);
+	border-radius: 5px;
+	color: black;
+	font-size:15px ;
+}
+.validate{
+	width: 295px;
+	height: 37px;
+	margin: 10px 0;
+	float: left;
+	border: 1px solid rgba(39,40,34,0.5);
+}
+.validateCode{
+	float: left;
+	height: 35px;
+	width: 50%;
+	border: 0;
+	padding-left: 45px;
+	background: rgba(0,0,0,0.3);
+}
+.validateImg{
+	float: right;
+	height: 35px;
+	width: 50%;
+	border: 1px solid rgba(39,40,34,0.5);
+}
+.loginButton{
+	width: 295px;
+	height: 37px;
+	/*margin: 10px;*/
+	background: #2aabd2;
+	float: left;
+	/*border: 1px solid rgba(39,40,34,0.5);*/
+
+}

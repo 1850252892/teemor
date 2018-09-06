@@ -1,0 +1,117 @@
+.body{
+	/* Generated with http://gradient.quasi.ink */
+	background-size: cover;
+	background: url("/img/002.jpg");
+
+}
+.content{
+
+	background:rgba(231,231,231,0.3);
+}
+.head{
+	width: 100%;
+	height: 150px;
+	line-height: 150px;
+	padding-left: 10px;
+	font-size: 35px;
+	font-weight: 400;
+	color:white;
+
+}
+
+.left{
+	width: 150px;
+	height: auto;
+	overflow: auto;
+	position:absolute;
+	flot:left;
+	
+}
+.operation{
+	width: 100%;
+	height: 100px;
+}
+.operation label,.classify label{
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	background: rgba(255,255,255,0.8);
+	border-radius: 5px;
+	color: rgba(43,43,43);
+}
+.operation ul li,.classify ul li{
+	width: 100%;
+	float: left;
+	height: 25px;
+}
+.operation a,.classify a{
+	color: white;
+}
+
+.classify{
+	width: 100%;
+	height: auto;
+	overflow: auto;
+}
+.editBox{
+	width: auto;
+	height: auto;
+	overflow: auto;
+	margin-left: 150px;
+	padding: 10px 50px 0 50px;
+	border: 1px solid white;
+	border-radius: 5px;
+	background-color: white;
+}
+.lb{
+	background: rgba(229,238,247,1);
+	margin-bottom: 2px;
+	margin-top: 10px;
+}
+.editBox label{
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 5px;
+	border-radius: 5px;
+}
+#essayTitle{
+	width: 100%;
+	border: 1px solid;
+
+}
+.other{
+	width: 100%;
+	height: auto;
+	overflow: auto;
+	
+	padding: 0 10px 50px 10px;
+}
+.editBox button{
+	width: 150px;
+	height: 30px;
+	text-align: center;
+	margin-top: 20px;
+	background:#A8A297;
+}
+.bt{
+	width: 100%;
+	height: 2px;
+}
+.info{
+	width: 100%;
+	height: 100px;
+	border: 1px solid;
+}
+
+#reportTable tr{
+	height: 30px;
+
+}
+#reportTable td {
+	padding: 0 0 0 5px;
+	line-height: 30px;
+	width: 25%;
+	background-color: white;
+}
