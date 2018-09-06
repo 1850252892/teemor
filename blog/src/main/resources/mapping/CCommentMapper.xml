@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.CCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.CComment" >
+    <id column="ccId" property="ccid" jdbcType="VARCHAR" />
+    <result column="uId" property="uid" jdbcType="VARCHAR" />
+    <result column="ccDate" property="ccdate" jdbcType="TIME" />
+    <result column="great" property="great" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlk.blog.entity.CComment" extends="BaseResultMap" >
+    <result column="ccData" property="ccdata" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ccId, uId, ccDate, great
+  </sql>
+  <sql id="Blob_Column_List" >
+    ccData
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_ccomment
+    where ccId = #{ccid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_ccomment
+    where ccId = #{ccid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlk.blog.entity.CComment" >
+    insert into tb_ccomment (ccId, uId, ccDate, 
+      great, ccData)
+    values (#{ccid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{ccdate,jdbcType=TIME}, 
+      #{great,jdbcType=INTEGER}, #{ccdata,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.CComment" >
+    insert into tb_ccomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ccid != null" >
+        ccId,
+      </if>
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="ccdate != null" >
+        ccDate,
+      </if>
+      <if test="great != null" >
+        great,
+      </if>
+      <if test="ccdata != null" >
+        ccData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ccid != null" >
+        #{ccid,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ccdate != null" >
+        #{ccdate,jdbcType=TIME},
+      </if>
+      <if test="great != null" >
+        #{great,jdbcType=INTEGER},
+      </if>
+      <if test="ccdata != null" >
+        #{ccdata,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlk.blog.entity.CComment" >
+    update tb_ccomment
+    <set >
+      <if test="uid != null" >
+        uId = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="ccdate != null" >
+        ccDate = #{ccdate,jdbcType=TIME},
+      </if>
+      <if test="great != null" >
+        great = #{great,jdbcType=INTEGER},
+      </if>
+      <if test="ccdata != null" >
+        ccData = #{ccdata,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ccId = #{ccid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlk.blog.entity.CComment" >
+    update tb_ccomment
+    set uId = #{uid,jdbcType=VARCHAR},
+      ccDate = #{ccdate,jdbcType=TIME},
+      great = #{great,jdbcType=INTEGER},
+      ccData = #{ccdata,jdbcType=LONGVARCHAR}
+    where ccId = #{ccid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlk.blog.entity.CComment" >
+    update tb_ccomment
+    set uId = #{uid,jdbcType=VARCHAR},
+      ccDate = #{ccdate,jdbcType=TIME},
+      great = #{great,jdbcType=INTEGER}
+    where ccId = #{ccid,jdbcType=VARCHAR}
+  </update>
+</mapper>

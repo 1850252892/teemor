@@ -1,0 +1,45 @@
+Manifest-Version: 1.0
+Class-Path: spring-web-4.3.9.RELEASE.jar spring-webmvc-4.3.9.RELEASE.j
+ ar spring-jdbc-4.3.9.RELEASE.jar jackson-core-2.8.8.jar jackson-datab
+ ind-2.8.8.jar spring-boot-starter-tomcat-1.5.4.RELEASE.jar ueditor-1.
+ 1.2.jar spring-boot-devtools-1.5.4.RELEASE.jar pagehelper-spring-boot
+ -autoconfigure-1.1.2.jar spring-boot-starter-mail-1.5.4.RELEASE.jar s
+ pring-security-config-4.2.3.RELEASE.jar jackson-mapper-lgpl-1.8.5.jar
+  pagehelper-spring-boot-starter-1.1.2.jar fastjson-1.2.30.jar aspectj
+ weaver-1.8.10.jar mysql-connector-java-5.1.35.jar tomcat-embed-jasper
+ -8.5.15.jar spring-boot-autoconfigure-1.5.4.RELEASE.jar spring-boot-s
+ tarter-thymeleaf-1.5.4.RELEASE.jar spring-boot-starter-log4j2-1.5.4.R
+ ELEASE.jar spring-expression-4.3.9.RELEASE.jar jackson-core-asl-1.9.1
+ 3.jar spring-data-keyvalue-1.2.4.RELEASE.jar jul-to-slf4j-1.7.25.jar 
+ spring-data-commons-1.13.4.RELEASE.jar spring-boot-starter-freemarker
+ -1.5.4.RELEASE.jar spring-tx-4.3.9.RELEASE.jar validation-api-1.1.0.F
+ inal.jar log4j-api-2.7.jar spring-context-support-4.3.9.RELEASE.jar s
+ pring-boot-starter-web-1.5.4.RELEASE.jar jsqlparser-1.0.jar spring-bo
+ ot-starter-jdbc-1.5.4.RELEASE.jar spring-security-core-4.2.3.RELEASE.
+ jar druid-1.0.11.jar javassist-3.21.0-GA.jar jackson-annotations-2.8.
+ 0.jar javax.mail-1.5.6.jar classmate-1.3.3.jar spring-boot-starter-da
+ ta-redis-1.5.4.RELEASE.jar pagehelper-5.0.3.jar spring-boot-starter-a
+ ctuator-1.5.4.RELEASE.jar thymeleaf-layout-dialect-1.4.0.jar commons-
+ fileupload-1.3.1.jar jconsole.jar groovy-2.4.11.jar slf4j-api-1.7.25.
+ jar thymeleaf-2.1.5.RELEASE.jar mybatis-spring-boot-autoconfigure-1.3
+ .0.jar tools.jar spring-data-redis-1.8.4.RELEASE.jar spring-security-
+ web-4.2.3.RELEASE.jar log4j-slf4j-impl-2.7.jar hibernate-validator-5.
+ 3.5.Final.jar mybatis-3.4.4.jar ueditor-1.1.1.jar freemarker-2.3.26-i
+ ncubating.jar aopalliance-1.0.jar mybatis-spring-1.3.1.jar druid-spri
+ ng-boot-starter-1.1.0.jar jackson-core-lgpl-1.8.5.jar ognl-3.0.8.jar 
+ spring-boot-actuator-1.5.4.RELEASE.jar commons-codec-1.10.jar snakeya
+ ml-1.17.jar spring-aop-4.3.9.RELEASE.jar thymeleaf-spring4-2.1.5.RELE
+ ASE.jar tomcat-embed-el-8.5.15.jar spring-boot-starter-aop-1.5.4.RELE
+ ASE.jar unbescape-1.1.0.RELEASE.jar jcl-over-slf4j-1.7.25.jar ecj-3.1
+ 2.3.jar jackson-mapper-asl-1.9.13.jar tomcat-juli-8.5.15.jar commons-
+ io-2.2.jar spring-beans-4.3.9.RELEASE.jar spring-core-4.3.9.RELEASE.j
+ ar json-20170516.jar spring-context-4.3.9.RELEASE.jar tomcat-embed-we
+ bsocket-8.5.15.jar spring-boot-1.5.4.RELEASE.jar spring-security-oaut
+ h2-2.0.14.RELEASE.jar jstl-1.2.jar mybatis-spring-boot-starter-1.3.0.
+ jar commons-pool2-2.4.2.jar tomcat-jdbc-8.5.15.jar activation-1.1.jar
+  tomcat-embed-core-8.5.15.jar spring-oxm-4.3.9.RELEASE.jar spring-boo
+ t-starter-1.5.4.RELEASE.jar jboss-logging-3.3.1.Final.jar log4j-core-
+ 2.7.jar spring-boot-starter-security-1.5.4.RELEASE.jar jedis-2.9.0.ja
+ r
+Main-Class: com.zlk.blog.BlogApplication
+

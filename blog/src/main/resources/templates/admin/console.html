@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link href="/css/console.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/mycategorys.js"></script>
+    <script type="text/javascript" src="/js/console.js"></script>
+</head>
+<body class="body">
+<div class="content">
+
+
+    <div class="head">
+        Cloud Note
+    </div>
+
+
+    <div class="left">
+        <div class="operation">
+            <a href="/admin/console"><label>操作</label></a>
+            <ul>
+                <li>
+                    <a href="/admin/createEssay">新建文章</a>
+                </li>
+                <li>
+                    <a href="#">草稿箱</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="classify">
+            <label>分类</label>
+            <ul id="group_list">
+                <li>
+                    <a href="/admin/editType">编辑分类</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="right">
+        <label>文章</label>
+        <div class="essay-box">
+            <div id="essayTableDiv">
+                <table id="essayTable"></table>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

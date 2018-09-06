@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/essayData.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/leftmenu.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/essayData.js"></script>
+    <script type="text/javascript" src="/js/grouplist.js"></script>
+    <script type="text/javascript" src="/js/leftmenu.js"></script>
+    <script type="text/javascript" src="/js/ulogin.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+
+    <link rel="stylesheet" href="/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css"/>
+    <script type="text/javascript"> SyntaxHighlighter.all(); </script>
+
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body class="body">
+<div class='frosted-glass'></div>
+<!--<div class="top">
+    <div class="top_menu">
+        <a href="/">网站主页</a>
+        <a href="/">浏览更多</a>
+        <a href="/admin/console">关于我</a>
+        <a href="/">留言板</a>
+    </div>
+</div>-->
+<div class="left_menu">
+    <img src="/img/head2.gif"/>
+    <div style="color: white" id="author"></div>
+    <div class="top_menu">
+        <a href="/">主页</a><br/>
+        <a href="#" id="essayCategory">分类</a><br/>
+        <a href="#" id="essayForDate">归档</a><br/>
+        <!--<a href="/admin/console">关于我</a><br />-->
+        <a href="/">留言板</a><br/>
+    </div>
+
+
+    <div class="new_essay ">
+        <label><!--<i class="icon-folder-close-alt" style="color: white;margin-right: 10px"></i>-->最新文章</label>
+        <div class="essay_list">
+
+        </div>
+    </div><!-- .new_essay-->
+
+    <div class="group_essay">
+        <label><!--<i class="icon-folder-close-alt" style="color: white;margin-right: 10px"></i>-->文章分类</label>
+        <div class="group_list list" id="group_list">
+
+        </div>
+    </div><!-- .group_essay -->
+
+    <div class="date_essay">
+
+        <label><!--<i class="icon-folder-close-alt" style="color: white;margin-right: 10px"></i>-->文章归档</label>
+        <div class="date_list list">
+
+        </div>
+    </div><!-- .date_essay-->
+
+    <!--<div class="brows_rank">-->
+    <!--<label><i class="icon-folder-close-alt" style="color: white;margin-right: 10px"></i>点击排行</label>-->
+    <!--<div class="rank_list list">-->
+
+    <!--</div>-->
+    <!--</div>&lt;!&ndash; .brows_rank &ndash;&gt;-->
+</div>
+
+
+<div class="user">
+    <div id="user_img">
+       <a href="#"> <img id="logIco" src="/img/002.jpg"/></a>
+    </div>
+    <div id="user_menu">
+
+    </div>
+</div>
+
+
+<!-- 按钮触发模态框 -->
+<!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>-->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 20em;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="username1" style="display: none"/>
+                <input type="text" id="username" placeholder="用户名" class="form-control" autocomplete="off"/><br />
+                <input type="password" id="password1" style="display:none" />
+                 <input type="password" id="password" placeholder="密码" class="form-control" autocomplete="off"/>
+                    <label id="tips"></label>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="login()" >登录</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<div class="essay_box">
+    <div class="essayTitle"></div>
+
+    <div class="essayData"></div>
+    <br/>
+    <div class="essayGroup" id="essayGroup"><label>分类：</label></div>
+    <div id="essayDate"><label>@</label></div>
+
+    <div class="comment_box">
+        <div class="comment_input">
+            <label>发表评论</label><br/>
+            <textarea class="" id="comment" style="width: 450px;height: 200px">
+            </textarea>
+            <br/>
+            <button class="btn btn-default" onclick="submitComment()">提交评论</button>
+        </div>
+        <label id="comment_count">评论列表</label><a href="javascript:getCommentList()">刷新评论列表</a>
+        <div class="comment_list">
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

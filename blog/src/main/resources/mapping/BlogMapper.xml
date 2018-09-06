@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zlk.blog.mapper.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.zlk.blog.entity.Blog" >
+    <id column="bId" property="bid" jdbcType="VARCHAR" />
+    <result column="bTitle" property="btitle" jdbcType="VARCHAR" />
+    <result column="bDate" property="bdate" jdbcType="TIME" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlk.blog.entity.Blog" extends="BaseResultMap" >
+    <result column="bData" property="bdata" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <resultMap id="ModelTo" type="com.zlk.blog.model.EssayModelTo" >
+    <id column="bid" property="bid" jdbcType="VARCHAR" />
+    <result column="btitle" property="btitle" jdbcType="VARCHAR" />
+    <result column="bdata" property="bdata" jdbcType="LONGVARCHAR" />
+    <result column="bdate" property="bdate" jdbcType="TIME" />
+    <result column="browse" property="browse" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bId, bTitle, bDate
+  </sql>
+  <sql id="Blob_Column_List" >
+    bData
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_blog
+    where bId = #{bid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_blog
+    where bId = #{bid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zlk.blog.entity.Blog" >
+    insert into tb_blog (bId, bTitle, bDate, 
+      bData)
+    values (#{bid,jdbcType=VARCHAR}, #{btitle,jdbcType=VARCHAR}, #{bdate,jdbcType=TIME}, 
+      #{bdata,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zlk.blog.entity.Blog" >
+    insert into tb_blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bid != null" >
+        bId,
+      </if>
+      <if test="btitle != null" >
+        bTitle,
+      </if>
+      <if test="bdate != null" >
+        bDate,
+      </if>
+      <if test="bdata != null" >
+        bData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bid != null" >
+        #{bid,jdbcType=VARCHAR},
+      </if>
+      <if test="btitle != null" >
+        #{btitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bdate != null" >
+        #{bdate,jdbcType=TIME},
+      </if>
+      <if test="bdata != null" >
+        #{bdata,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zlk.blog.entity.Blog" >
+    update tb_blog
+    <set >
+      <if test="btitle != null" >
+        bTitle = #{btitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bdate != null" >
+        bDate = #{bdate,jdbcType=TIME},
+      </if>
+      <if test="bdata != null" >
+        bData = #{bdata,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where bId = #{bid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlk.blog.entity.Blog" >
+    update tb_blog
+    set bTitle = #{btitle,jdbcType=VARCHAR},
+      bDate = #{bdate,jdbcType=TIME},
+      bData = #{bdata,jdbcType=LONGVARCHAR}
+    where bId = #{bid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlk.blog.entity.Blog" >
+    update tb_blog
+    set bTitle = #{btitle,jdbcType=VARCHAR},
+      bDate = #{bdate,jdbcType=TIME}
+    where bId = #{bid,jdbcType=VARCHAR}
+  </update>
+</mapper>
