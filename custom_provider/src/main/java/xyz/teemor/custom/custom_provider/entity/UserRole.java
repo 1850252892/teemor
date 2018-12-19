@@ -2,7 +2,7 @@ package xyz.teemor.custom.custom_provider.entity;
 
 public class UserRole {
     private Integer id;
-    private String name;
+    private String roleName;
     private Integer descrip;
 
     public UserRole() {
@@ -10,7 +10,7 @@ public class UserRole {
 
     public UserRole(Integer id, String name, Integer descrip) {
         this.id = id;
-        this.name = name;
+        this.roleName = name;
         this.descrip = descrip;
     }
 
@@ -22,12 +22,12 @@ public class UserRole {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String name) {
+        this.roleName = name;
     }
 
     public Integer getDescrip() {
@@ -42,7 +42,7 @@ public class UserRole {
     public String toString() {
         return "UserRole[" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + roleName + '\'' +
                 ", descrip=" + descrip +
                 ']';
     }

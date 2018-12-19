@@ -42,8 +42,8 @@ public class ShiroController {
     public static final Logger log= LoggerFactory.getLogger(ShiroController.class);
     @Autowired
     UserService userService;
-    @Autowired
-    RedisUtil redisUtil;
+//    @Autowired
+//    RedisUtil redisUtil;
     /**
      * 登录方法
      * @param
@@ -111,7 +111,7 @@ public class ShiroController {
         Map<String,String> rData=new HashMap<>();
         if (rememberMe.equals("true")){
             rememberMe= UUID.randomUUID().toString();
-            redisUtil.set(rememberMe,token);
+//            redisUtil.set(rememberMe,token);
             rData.put("rememberMe",rememberMe);
         }
         rData.put("token",token);

@@ -55,7 +55,7 @@ public class UserRealm extends AuthorizingRealm {
         List<UserRole> roles = userService.selectRoleByUserId(username);
         Set<String> roleNames = new HashSet<String>();
         for (UserRole role : roles) {
-            roleNames.add(role.getName());
+            roleNames.add(role.getRoleName());
         }
         // 将角色名称提供给info
         authorizationInfo.setRoles(roleNames);
