@@ -8,7 +8,6 @@ public class EssayPro {
     public String getEssayList(Map<String,String> map){
         return new SQL(){
             {
-
                 if (map.get("date")!=null){
                     System.out.println("sdfds"+map.get("date"));
                     SELECT("a.bid bid","a.btitle btitle","a.bdata bdata","a.bdate bdate","d.browse browse","f.nickname nickname","f.uid uid");

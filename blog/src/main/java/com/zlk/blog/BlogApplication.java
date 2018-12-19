@@ -8,7 +8,7 @@ import xyz.teemor.tool.RedisUtil;
 
 //@EnableTransactionManagement
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
 @MapperScan("com.zlk.blog.mapper")
 public class BlogApplication {
 

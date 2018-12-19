@@ -45,7 +45,8 @@ spring:
               smtp:
                   auth: true
                   timeout: 25000
-
+  thymeleaf:
+      mode: LEGACYHTML5
 redis:
       host: 127.0.0.1
       port: 6379
@@ -55,12 +56,7 @@ redis:
             max-wait: -1
             max-idle: 8
             min-idle: 0
-security:
-  oauth2:
-    resource:
-      filter-order: 3
-    sso:
-      login-path: /login_page
 server:
   port: 80
+
 

@@ -9,6 +9,27 @@ public class Blog {
 
     private String bdata;
 
+    private String bSummary;
+
+    private String cover;
+
+
+    public String getbSummary() {
+        return bSummary;
+    }
+
+    public void setbSummary(String bSummary) {
+        this.bSummary = bSummary;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
     public String getBid() {
         return bid;
     }

@@ -1,10 +1,7 @@
 package com.zlk.blog.mapper;
 
 import com.zlk.blog.entity.Blog;
-import com.zlk.blog.model.AppNoteModel;
-import com.zlk.blog.model.EssayModel;
-import com.zlk.blog.model.EssayModelTo;
-import com.zlk.blog.model.GroupByDateModel;
+import com.zlk.blog.model.*;
 import com.zlk.blog.provider.EssayPro;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -50,4 +47,6 @@ public interface BlogMapper {
 
     @Select("select * from tb_useressay a,tb_blog b,tb_bgroup c where a.uid=#{username} and a.bid=b.bid and b.bid=c.bid")
     List<AppNoteModel> selectNoteModel(String username);
+
+    List<Blog> selectArticles(ArticleSelect select);
 }

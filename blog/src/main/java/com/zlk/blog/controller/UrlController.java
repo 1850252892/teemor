@@ -65,4 +65,9 @@ public class
 
     @GetMapping("/u/*")
     public ModelAndView blog(){return new ModelAndView("blog");}
+
+    @GetMapping("/article/**")
+    public String article(){
+        return "lw-article";
+    }
 }

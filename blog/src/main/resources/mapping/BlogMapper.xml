@@ -102,4 +102,24 @@
       bDate = #{bdate,jdbcType=TIME}
     where bId = #{bid,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectArticles" parameterType="com.zlk.blog.model.ArticleSelect" resultType="com.zlk.blog.entity.Blog">
+    select b.bId,b.bTitle,b.bData,b.bDate,b.bSummary,b.cover
+    from tb_blog b join tb_bgroup bg on b.bId=bg.bId join tb_group g on bg.gId=g.gId
+    <where>
+        <if test="bTitle!=null" >
+            and b.bTitle like '%${bTitle}%'
+        </if>
+        <if test="group!=null">
+            and (g.groupName like %${group}% or g.gId=#{group})
+        </if>
+        <if test="startTime!=null">
+            and b.bDate between #{startTime} and #{endTime}
+        </if>
+        <if test="date!=null">
+            and b.bDate like '${date}%'
+        </if>
+    </where>
+
+  </select>
 </mapper>

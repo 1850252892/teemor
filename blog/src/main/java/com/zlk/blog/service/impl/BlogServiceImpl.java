@@ -1,14 +1,13 @@
 package com.zlk.blog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zlk.blog.entity.BGroupKey;
 import com.zlk.blog.entity.BOther;
 import com.zlk.blog.entity.Blog;
 import com.zlk.blog.entity.UserEssay;
 import com.zlk.blog.mapper.*;
-import com.zlk.blog.model.AppNoteModel;
-import com.zlk.blog.model.EssayModel;
-import com.zlk.blog.model.EssayModelTo;
-import com.zlk.blog.model.GroupByDateModel;
+import com.zlk.blog.model.*;
 import com.zlk.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,5 +105,14 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<AppNoteModel> selectNoteModel(String username) {
         return bm.selectNoteModel(username);
+    }
+
+    @Override
+    public PageInfo<Blog> selectArticles(ArticleSelect select) {
+        if (select.getPageIndex()!=null && select.getPageSize()!=null)
+            PageHelper.startPage(select.getPageIndex(),select.getPageSize());
+        List<Blog> list=bm.selectArticles(select);
+        PageInfo<Blog> pageInfo=new PageInfo<>(list);
+        return pageInfo;
     }
 }

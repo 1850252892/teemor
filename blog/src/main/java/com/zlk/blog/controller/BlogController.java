@@ -6,10 +6,7 @@ import com.zlk.blog.entity.BGroupKey;
 import com.zlk.blog.entity.BOther;
 import com.zlk.blog.entity.Blog;
 import com.zlk.blog.entity.UserEssay;
-import com.zlk.blog.model.AppNoteModel;
-import com.zlk.blog.model.EssayModel;
-import com.zlk.blog.model.EssayModelTo;
-import com.zlk.blog.model.GroupByDateModel;
+import com.zlk.blog.model.*;
 import com.zlk.blog.service.BGroupService;
 import com.zlk.blog.service.BOtherService;
 import com.zlk.blog.service.BlogService;
@@ -20,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -139,7 +137,7 @@ public class BlogController {
     /**
      * 删除文章
      * @param bId
-     * @param model
+     * @param
      * @return
      */
     @DeleteMapping ("/admin/essay")
@@ -224,5 +222,25 @@ public class BlogController {
         return JSON.toJSONString(bOther);
     }
 
+    /**
+     * 根据条件获取文章列表
+     * @param request
+     * @return
+     */
+    @GetMapping("/article/getArticles")
+    public String apiGetAriticles(HttpServletRequest request){
+//        String pageIndexStr=request.getParameter("pageIndex");
+//        String type=request.getParameter("type");
+//        String date=request.getParameter("date");
+//        String tag=request.getParameter("tag");
+
+        List<Blog> blogList;
+        Map<String,String> map=new HashMap<>();
+        ArticleSelect select=new ArticleSelect();
+        select.setPageIndex(1);
+        select.setPageSize(2);
+        blogList=bs.selectArticles(select).getList();
+        return JSON.toJSONString(blogList);
+    }
 
 }

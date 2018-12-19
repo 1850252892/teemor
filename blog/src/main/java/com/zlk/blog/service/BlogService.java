@@ -1,13 +1,11 @@
 package com.zlk.blog.service;
 
+import com.github.pagehelper.PageInfo;
 import com.zlk.blog.entity.BGroupKey;
 import com.zlk.blog.entity.BOther;
 import com.zlk.blog.entity.Blog;
 import com.zlk.blog.entity.UserEssay;
-import com.zlk.blog.model.AppNoteModel;
-import com.zlk.blog.model.EssayModel;
-import com.zlk.blog.model.EssayModelTo;
-import com.zlk.blog.model.GroupByDateModel;
+import com.zlk.blog.model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -66,4 +64,6 @@ public interface BlogService {
 
 
     List<AppNoteModel> selectNoteModel(String username);
+
+    PageInfo<Blog> selectArticles(ArticleSelect select);
 }
