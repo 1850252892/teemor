@@ -11,6 +11,15 @@ public class ArticleSelect {
     private String date;
     private String group;
     private String bTitle;
+    private String bId;
+
+    public String getbId() {
+        return bId;
+    }
+
+    public void setbId(String bId) {
+        this.bId = bId;
+    }
 
     public Integer getPageIndex() {
         return pageIndex;

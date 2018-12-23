@@ -49,4 +49,6 @@ public interface BlogMapper {
     List<AppNoteModel> selectNoteModel(String username);
 
     List<Blog> selectArticles(ArticleSelect select);
+
+    List<ArticleByDate> selectGroupByDate();
 }

@@ -69,7 +69,7 @@ public class GroupController {
      */
 //    @GetMapping(value = "/selectGroupList")
     @GetMapping(value = "/grouplist")
-    public String apiSelectGroupList(@RequestParam("uid") String uId){
+    public String apiSelectGroupList(@RequestParam("uId") String uId){
         logger.info(uId+"请求数据");
         List<Group> groupList=groupService.selectGroupList(uId);
         String result= JSON.toJSONString(groupList);

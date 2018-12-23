@@ -1,4 +1,4 @@
-var username=$.cookie("myCloud_username");
+var username=1008612;
 $(function () {
     $.ajax({
         url:"/grouplist",
@@ -10,7 +10,7 @@ $(function () {
         success:function (data) {
             var group=JSON.parse(data);
             var index=group.length-1;
-            while(index>0){
+            while(index>=0){
                 var a="<div style='width: 10em;float: left;'><input type='radio' name='group'  id='group' value="+group[index].gid+">"+group[index].gname+"</div>";
                  $("#type").append(a);
 
@@ -31,7 +31,13 @@ function submit() {
     var essayTitle=$("#essayTitle").val();
     var group = $("input[name='group']:checked").val();
      // alert("选中的radio的值是：" + group);
-    var Content = ue.getAllHtml();
+    var Content = editor.txt.html();
+    var cover=$("#coverImg").attr("src");
+    var summary=editor.txt.text();
+    var len=summary.length;
+    if (len>100){
+        summary=summary.substring(0,100);
+    }
     $.ajax({
         url: "/admin/essay",
         type: "post",
@@ -41,7 +47,9 @@ function submit() {
             "btitle":essayTitle,
             "bdata":Content,
             "gid":group,
-            "uid":username
+            "uid":username,
+            "cover":cover,
+            "bSummary":summary
 
         }),
         success: function (a) {

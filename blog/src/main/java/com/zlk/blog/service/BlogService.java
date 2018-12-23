@@ -65,5 +65,19 @@ public interface BlogService {
 
     List<AppNoteModel> selectNoteModel(String username);
 
-    PageInfo<Blog> selectArticles(ArticleSelect select);
+    /**
+     * 分页查询文章列表
+     * @param select
+     * @return
+     */
+    List<Blog> selectArticles4P(ArticleSelect select);
+
+    /**
+     * 查询文章
+     * @param select
+     * @return
+     */
+    List<Blog> selectArticles(ArticleSelect select);
+
+    List<ArticleByDate> selectGroupByDate();
 }

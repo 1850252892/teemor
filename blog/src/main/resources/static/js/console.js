@@ -39,7 +39,7 @@ $(function () {
 });
 
 var TableInit = function () {
-    var username=$.cookie("myCloud_username");
+    var username=1008612;
     var oTableInit = {};
     //初始化Table
     oTableInit.Init = function () {

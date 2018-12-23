@@ -223,24 +223,30 @@ public class BlogController {
     }
 
     /**
-     * 根据条件获取文章列表
-     * @param request
+     *
+     *
+     *
+     * @param select
      * @return
      */
     @GetMapping("/article/getArticles")
-    public String apiGetAriticles(HttpServletRequest request){
-//        String pageIndexStr=request.getParameter("pageIndex");
-//        String type=request.getParameter("type");
-//        String date=request.getParameter("date");
-//        String tag=request.getParameter("tag");
-
+    public String apiGetAriticles(ArticleSelect select){
         List<Blog> blogList;
-        Map<String,String> map=new HashMap<>();
-        ArticleSelect select=new ArticleSelect();
-        select.setPageIndex(1);
-        select.setPageSize(2);
-        blogList=bs.selectArticles(select).getList();
+        blogList=bs.selectArticles4P(select);
         return JSON.toJSONString(blogList);
+    }
+
+    @GetMapping("/article/getArticle")
+    public String apiGetAriticle(ArticleSelect select){
+        List<Blog> blogList;
+        blogList=bs.selectArticles(select);
+        return JSON.toJSONString(blogList.get(0));
+    }
+
+    @GetMapping("/getGroupByDate")
+    public String apiGetGroupByDate(){
+        List<ArticleByDate> list=bs.selectGroupByDate();
+        return JSON.toJSONString(list);
     }
 
 }

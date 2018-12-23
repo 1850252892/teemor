@@ -12,6 +12,9 @@ pagehelper:
       params: count=countSql
 
 spring:
+  servlet:
+    multipart:
+      location: F:/IMG
 
   datasource:
             name: test

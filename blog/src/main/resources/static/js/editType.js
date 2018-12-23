@@ -35,7 +35,7 @@ function editGroup() {
 function creategroup() {
     var gname=$("#groupTitle").val();
     var glabel=$("#groupinfo").val();
-    var username=$.cookie("myCloud_username");
+    var username='1008612';
     if (gname==""&&glabel==""){
         alert("你没有做出任何更改");
         return;
@@ -105,7 +105,7 @@ $(function () {
 });
 
 var TableInit = function () {
-    var username=$.cookie("myCloud_username");
+    var username='1008612';
     var oTableInit = {};
     //初始化Table
     oTableInit.Init = function () {
@@ -118,7 +118,7 @@ var TableInit = function () {
             pagination: true,                   //是否显示分页（*）
             sortable: false,                     //是否启用排序
             sortOrder: "asc",                   //排序方式
-            queryParams: {"uid":username},//传递参数（*）
+            queryParams: {"uId":username},//传递参数（*）
             sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 5,                       //每页的记录行数（*）

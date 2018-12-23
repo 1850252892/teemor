@@ -8,21 +8,13 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/wangEditor-3.1.1/release/wangEditor.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/js/createEssay.js"></script>
-    <script type="text/javascript" src="/js/mycatorys.js"/>
-    <!--
-        作者：1850252892@qq.com
-        时间：2018-03-17
-        描述：引入富文本编辑器
-    -->
-    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.parse.js"></script>
+    <script type="text/javascript" src="/js/mycategorys.js"></script>
+    <script type="text/javascript" src="/wangEditor-3.1.1/release/wangEditor.min.js"></script>
+
 
 </head>
 
@@ -31,7 +23,7 @@
     <div class="head">
         Cloud Note
     </div>
-    <div class="left">
+    <div class="_left">
         <div class="operation">
             <a href="/admin/console"><label>操作</label></a>
             <ul>
@@ -60,8 +52,15 @@
         <label class="lb">新建文章</label>
         <label>文章标题</label>
         <input type="text" name="essayTitle" id="essayTitle" placeholder="输入文章标题"/>
+        <br/>
+       <div style="margin-top: 20px">
+           <label style="float: left; width: 100px;">上传封面：</label><input  style="float: left;width: 200px;" type="file" onchange="upCover(this)" id="upCover" />
+           <img src="" id="coverImg" width="200px">
+       </div>
         <label>内容</label>
-        <script id="editor" type="text/plain" style="width:100%;height:500px;"/>
+        <div id="editor">
+            <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+        </div>
 
         <label class="lb">其他选项</label>
         <div class="other">
@@ -72,7 +71,7 @@
             <label class="lb">发布选项</label>
             <b><input type="checkbox" name="caogao" value="1"/>添加到草稿箱</b>
             <br />
-            <button type="button" class="btn btn-default" onclick="submit()">提交</button>
+            <button type="button" class="btn btn-default button" onclick="submit()">提交</button>
         </div>
 
 
@@ -83,13 +82,81 @@
 
 </div>
 
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.customConfig.uploadImgServer = '/uploadImgToQn';
+    editor.customConfig.uploadFileName = 'imgFile'
+    editor.customConfig.uploadImgHooks = {
+        before : function(xhr, editor, files) {
+            // 图片上传之前触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+
+            // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+            // return {
+            //     prevent: true,
+            //     msg: '放弃上传'
+            // }
+        },
+        success : function(xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        fail : function(xhr, editor, result) {
+            // 图片上传并返回结果，但图片插入错误时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+        },
+        error : function(xhr, editor) {
+            // 图片上传出错时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        },
+        timeout : function(xhr, editor) {
+            // 图片上传超时时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+        },
+
+        // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+        // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+        customInsert : function(insertImg, result, editor) {
+            // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+
+            // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+            var url = result.data[0];
+            insertImg(url)
+
+            // result 必须是一个 JSON 格式字符串！！！否则报错
+        }
+    }
+    editor.create()
+    E.fullscreen.init('#editor');
+
+
+    function upCover(_this) {
+        var file = $('#upCover').get(0).files[0];
+        var form = new FormData();
+        form.append("imgFile", file)
+        $.ajax({
+            url:"/uploadImgToQn",
+            type:"post",
+            data:form,
+            dataType:"JSON",
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function (data) {
+                $("#coverImg").attr("src",data.data[0]);
+            },
+            error:function () {
+                alert("error")
+            }
+        })
+    }
+</script>
 
 </body>
 
-<script type="text/javascript">
-    var ue = UE.getEditor('editor');
 
-
-</script>
 
 </html>

@@ -19,7 +19,7 @@
 
 }
 
-.left{
+._left{
 	width: 150px;
 	height: auto;
 	overflow: auto;
@@ -88,7 +88,7 @@
 	
 	padding: 0 10px 50px 10px;
 }
-.editBox button{
+.editBox .button{
 	width: 150px;
 	height: 30px;
 	text-align: center;

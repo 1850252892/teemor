@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2017/12/11.
  */
-@Configuration
+//@Configuration
 public class ShiroConfig {
     // cas server地址
     public static final String casServerUrlPrefix = "http://127.0.0.1";
@@ -119,11 +119,11 @@ public class ShiroConfig {
     }
 
     //自定义sessionManager
-    @Bean
-    public SessionManager sessionManager() {
-        MySessionManager mySessionManager = new MySessionManager();
-        return mySessionManager;
-    }
+//    @Bean
+//    public SessionManager sessionManager() {
+//        MySessionManager mySessionManager = new MySessionManager();
+//        return mySessionManager;
+//    }
 
 
 
@@ -180,8 +180,8 @@ public class ShiroConfig {
      * 注册全局异常处理
      * @return
      */
-    @Bean(name = "exceptionHandler")
-    public HandlerExceptionResolver handlerExceptionResolver() {
-       return new MyExceptionHandler();
-    }
+//    @Bean(name = "exceptionHandler")
+//    public HandlerExceptionResolver handlerExceptionResolver() {
+//       return new MyExceptionHandler();
+//    }
 }

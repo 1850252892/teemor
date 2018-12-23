@@ -108,11 +108,23 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public PageInfo<Blog> selectArticles(ArticleSelect select) {
+    public List<Blog> selectArticles4P(ArticleSelect select) {
         if (select.getPageIndex()!=null && select.getPageSize()!=null)
             PageHelper.startPage(select.getPageIndex(),select.getPageSize());
+        else
+            return selectArticles(select);
         List<Blog> list=bm.selectArticles(select);
         PageInfo<Blog> pageInfo=new PageInfo<>(list);
-        return pageInfo;
+        return pageInfo.getList();
+    }
+
+    @Override
+    public List<Blog> selectArticles(ArticleSelect select) {
+        return bm.selectArticles(select);
+    }
+
+    @Override
+    public List<ArticleByDate> selectGroupByDate() {
+        return bm.selectGroupByDate();
     }
 }

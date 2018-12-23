@@ -19,6 +19,22 @@
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="groupByDate" type="com.zlk.blog.model.ArticleByDate">
+    <id column="byear" property="year" jdbcType="VARCHAR"></id>
+    <collection property="months" ofType="com.zlk.blog.model.ArticleByDate" javaType="java.util.ArrayList">
+      <id column="bmonth" property="month" jdbcType="VARCHAR"></id>
+      <collection property="blogs" ofType="com.zlk.blog.entity.Blog" javaType="java.util.ArrayList">
+        <result property="btitle" column="bTitle" jdbcType="VARCHAR"></result>
+        <result property="bdate" column="bDate" jdbcType="VARCHAR"></result>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <select id="selectGroupByDate" resultMap="groupByDate">
+    select year(b.bDate) byear, month(b.bDate) bmonth,b.bTitle,b.bDate
+    from tb_blog b
+    group by byear,bmonth,b.bTitle,b.bDate
+  </select>
   <sql id="Base_Column_List" >
     bId, bTitle, bDate
   </sql>
@@ -39,9 +55,9 @@
   </delete>
   <insert id="insert" parameterType="com.zlk.blog.entity.Blog" >
     insert into tb_blog (bId, bTitle, bDate, 
-      bData)
+      bData,bSummary,cover)
     values (#{bid,jdbcType=VARCHAR}, #{btitle,jdbcType=VARCHAR}, #{bdate,jdbcType=TIME}, 
-      #{bdata,jdbcType=LONGVARCHAR})
+      #{bdata,jdbcType=LONGVARCHAR},#{bSummary,jdbcType=VARCHAR},#{cover,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zlk.blog.entity.Blog" >
     insert into tb_blog
@@ -74,6 +90,7 @@
       </if>
     </trim>
   </insert>
+  <!-- 更新博客文章信息-->
   <update id="updateByPrimaryKeySelective" parameterType="com.zlk.blog.entity.Blog" >
     update tb_blog
     <set >
@@ -86,9 +103,16 @@
       <if test="bdata != null" >
         bData = #{bdata,jdbcType=LONGVARCHAR},
       </if>
+      <if test="bSummary !=null">
+        bSummary=#{bSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="cover !=null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
     </set>
     where bId = #{bid,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlk.blog.entity.Blog" >
     update tb_blog
     set bTitle = #{btitle,jdbcType=VARCHAR},
@@ -103,15 +127,16 @@
     where bId = #{bid,jdbcType=VARCHAR}
   </update>
 
+  <!-- 查询博客列表信息-->
   <select id="selectArticles" parameterType="com.zlk.blog.model.ArticleSelect" resultType="com.zlk.blog.entity.Blog">
-    select b.bId,b.bTitle,b.bData,b.bDate,b.bSummary,b.cover
-    from tb_blog b join tb_bgroup bg on b.bId=bg.bId join tb_group g on bg.gId=g.gId
+    select b.bId,b.bTitle,b.bData,b.bDate,b.bSummary,b.cover,u.nickname as author,g.gName as type
+    from tb_blog b join tb_bgroup bg on b.bId=bg.bId join tb_group g on bg.gId=g.gId join tb_user u on g.uId = u.uId
     <where>
         <if test="bTitle!=null" >
             and b.bTitle like '%${bTitle}%'
         </if>
         <if test="group!=null">
-            and (g.groupName like %${group}% or g.gId=#{group})
+            and (g.groupName like '%${group}%' or g.gId=#{group})
         </if>
         <if test="startTime!=null">
             and b.bDate between #{startTime} and #{endTime}
@@ -119,7 +144,12 @@
         <if test="date!=null">
             and b.bDate like '${date}%'
         </if>
+        <if test="bId!=null">
+          and b.bId=#{bId}
+        </if>
     </where>
-
+    order by b.bId desc
   </select>
+
+
 </mapper>
